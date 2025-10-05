@@ -25,7 +25,7 @@ const menuItems = [
   { icon: faUserPlus, label: "Usuarios", id: "usuarios" },
   { icon: faUsers, label: "Grupos", id: "grupos" },
   { icon: faHeart, label: "Favoritos", id: "favoritos" },
-  { icon: faCoins, label: "Divisas", id: "divisas" },
+  { icon: faCoins, label: "Precios", id: "precios" },
   { icon: faBuilding, label: "Propiedades", id: "propiedades" },
   { icon: faCalendar, label: "Calendario", id: "calendario" },
   { icon: faFileAlt, label: "Archivos", id: "archivos" },
@@ -38,7 +38,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`h-screen flex flex-col justify-between bg-white border-l shadow-sm transition-all duration-300
+      className={`h-screen flex flex-col justify-between bg-white border-r border-gray-300 shadow-sm transition-all duration-300
       ${expanded ? "w-48" : "w-16"}`}
     >
       <div className="relative flex flex-col items-center py-4">
