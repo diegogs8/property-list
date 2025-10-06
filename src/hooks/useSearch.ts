@@ -42,7 +42,6 @@ export function useSearch({
     });
   }, [searchFields]);
 
-  // Efecto para manejar la búsqueda con debounce
   useEffect(() => {
     if (!searchTerm.trim()) {
       setFilteredProperties(properties);

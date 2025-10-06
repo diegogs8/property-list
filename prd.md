@@ -1,201 +1,246 @@
 # Product Requirements Document (PRD)
-## Property List Table Implementation
+## Property Detail Modal Component
 
 ### 1. Overview
-This PRD outlines the implementation of a property list table component that displays property data in a paginated table format. The table will be integrated into the existing PropertyListScreen and will display property information with clickable rows for future functionality.
 
-### 2. Objectives
-- Create a responsive property table with pagination
-- Implement reusable components for property display
-- Integrate with existing property data from JSON file
-- Prepare for future click functionality on table rows
+**Product Name:** Property Detail Modal Component  
+**Version:** 1.0  
+**Date:** December 2024  
+**Author:** Development Team  
 
-### 3. Functional Requirements
+### 2. Product Summary
 
-#### 3.1 Table Structure
-The table must contain the following columns in Spanish:
-- **Foto** (Photo) - Display property image
-- **Oficina** (Office) - Display office/branch information
-- **Referencia** (Reference) - Display property reference ID
-- **Tipo** (Type) - Display property type
-- **Dirección** (Address) - Display property location/address
-- **Precio** (Price) - Display property price with currency
-- **Habitaciones** (Rooms) - Display number of bedrooms
-- **Superficie** (Surface) - Display property area in square meters
-- **Fecha** (Date) - Display property listing date
+This PRD defines the requirements for implementing a property detail modal component that displays comprehensive information about a selected property. The modal will be a centered overlay with a clean, modern design that presents property data in a structured two-column layout.
 
-#### 3.2 Pagination Requirements
-- Display exactly 8 properties per page
-- Implement pagination controls (Previous/Next buttons and page numbers)
-- Show current page indicator
-- Handle edge cases (first page, last page, empty results)
+### 3. Objectives
 
-#### 3.3 Component Architecture
+- Create a visually appealing modal component for displaying detailed property information
+- Implement a responsive two-column layout optimized for desktop viewing
+- Provide a clean, intuitive user interface for property details
+- Ensure proper data mapping from property objects to UI elements
+- Maintain consistency with the existing design system
 
-##### 3.3.1 PropertyList Component
-**Location:** `src/components/ui/PropertyList.tsx`
+### 4. User Stories
 
-**Props:**
-- `properties: Property[]` - Array of property objects
-- `onPropertyClick?: (property: Property) => void` - Optional click handler for future implementation
+**As a user viewing the property list, I want to:**
+- Click on a property to see detailed information in a modal
+- View all relevant property characteristics in an organized format
+- See property images in a grid layout
+- Read the full property description
+- Close the modal easily when I'm done viewing
 
-**Responsibilities:**
-- Render the complete table structure with headers
-- Implement pagination logic
-- Manage current page state
-- Pass individual properties to PropertyListItem components
-- Handle pagination controls
+### 5. Functional Requirements
 
-##### 3.3.2 PropertyListItem Component
-**Location:** `src/components/ui/PropertyListItem.tsx`
+#### 5.1 Modal Structure
+- **Component Name:** `PropertyDetailModal`
+- **File Location:** `src/components/ui/propertyDetailModal.tsx`
+- **Modal Behavior:** Centered overlay with white background
+- **Scroll Behavior:** Internal scrolling for content overflow
+- **Backdrop:** Semi-transparent overlay behind modal
 
-**Props:**
-- `property: Property` - Single property object
-- `onClick?: (property: Property) => void` - Optional click handler
+#### 5.2 Header Section
+- **Property Title:** Display `property.title` (e.g., "REF-842")
+- **Close Button:** "X" icon aligned to the right
+- **Styling:** Clean header with proper spacing and typography
 
-**Responsibilities:**
-- Render a single table row with property data
-- Format property data for display (price, area, etc.)
-- Handle click events on the row
-- Display property image with fallback
-- Show property status/type with appropriate styling
+#### 5.3 Two-Column Layout
+- **Left Column:** Approximately 60% of modal width
+- **Right Column:** Approximately 40% of modal width
+- **Responsive:** Maintain proportions on different screen sizes
 
-#### 3.4 Data Integration
-- Import property data from `src/data/properties.json`
-- Transform data to match table requirements
-- Handle missing or incomplete property data gracefully
-- Maintain data consistency across components
+#### 5.4 Left Column Content
 
-### 4. Technical Requirements
+##### 5.4.1 Price and Location
+- **Price:** Display `property.price` + `property.currency` in large, bold text
+- **Location:** Display `property.location` below price in smaller text
+- **Styling:** Prominent price display with clear hierarchy
 
-#### 4.1 Component Structure
+##### 5.4.2 Characteristics Section
+- **Section Title:** "Características"
+- **Data Mapping:**
+  - `property.area` → "Superficie"
+  - `property.bedrooms` → "Habitaciones" (conditional display)
+  - `property.bathrooms` → "Baños" (conditional display)
+  - `property.type` → "Tipo de propiedad"
+  - `property.status` → "Estado / Conservación"
+  - `property.office` → "Oficina"
+  - `property.date` → "Fecha de publicación"
+- **Layout:** Grid or list format with clear labels and values
+- **Conditional Rendering:** Only show fields that exist in the property data
+
+##### 5.4.3 Details Section
+- **Section Title:** "Detalles"
+- **Content:** Display `property.features[]` as tag/chip elements
+- **Layout:** Horizontal row of rounded tags
+- **Styling:** Consistent tag design with proper spacing
+
+##### 5.4.4 Images Section
+- **Section Title:** "Imágenes"
+- **Layout:** Grid format for image display
+- **Content:** Display first N images from `property.images[]`
+- **Overflow Indicator:** Show "+N" block if more images exist
+- **Image Handling:** Proper aspect ratios and responsive sizing
+
+#### 5.5 Right Column Content
+
+##### 5.5.1 Description Section
+- **Section Title:** "Descripción"
+- **Content:** Display `property.description`
+- **Scroll Behavior:** Internal scrolling if content exceeds available height
+- **Typography:** Readable text formatting with proper line spacing
+
+### 6. Technical Requirements
+
+#### 6.1 Component Architecture
+- **Framework:** React with TypeScript
+- **Styling:** Tailwind CSS v4
+- **Props Interface:** Well-defined TypeScript interface
+- **State Management:** Local component state only
+
+#### 6.2 Props Interface
+```typescript
+interface PropertyDetailModalProps {
+  property: Property;
+  isOpen: boolean;
+  onClose: () => void;
+}
 ```
-src/components/ui/
-├── PropertyList.tsx      # Main table component
-└── PropertyListItem.tsx  # Individual row component
-```
 
-#### 4.2 Data Mapping
-Map JSON properties to table columns:
-- `images[0]` → Foto
-- `id` → Referencia  
-- `type` → Tipo
-- `location` → Dirección
-- `price` + `currency` → Precio
-- `bedrooms` → Habitaciones
-- `area` → Superficie
-- `createdDate` or `listingDate` → Fecha (to be added to JSON if missing)
+#### 6.3 Data Requirements
+- Component must handle all property fields defined in the Property type
+- Graceful handling of missing or undefined property fields
+- Proper data validation and fallback values
 
-#### 4.3 Styling Requirements
-- Use Tailwind CSS v4 for styling
-- Implement responsive design for mobile and desktop
-- Ensure table is visually consistent with existing design
-- Add hover effects for clickable rows
-- Style pagination controls appropriately
+#### 6.4 Styling Requirements
+- Use Tailwind CSS v4 utility classes
+- Maintain consistent spacing and typography
+- Implement proper hover states and transitions
+- Ensure accessibility compliance (focus states, ARIA labels)
 
-#### 4.4 State Management
-- Manage current page state in PropertyList component
-- Calculate total pages based on property count
-- Handle page navigation (next, previous, specific page)
-- Maintain selected property state for future functionality
+### 7. Design Specifications
 
-### 5. Implementation Details
+#### 7.1 Modal Dimensions
+- **Width:** Responsive with maximum width constraint
+- **Height:** Dynamic based on content with maximum height
+- **Padding:** Consistent internal spacing
+- **Border Radius:** Subtle rounded corners
 
-#### 5.1 PropertyList Component Features
-- Table header with all required columns
-- Pagination controls (Previous, page numbers, Next)
-- Responsive table layout
-- Loading state handling
-- Empty state handling
+#### 7.2 Typography
+- **Price:** Large, bold text for emphasis
+- **Section Headers:** Medium weight, clear hierarchy
+- **Body Text:** Readable font size and line height
+- **Labels:** Consistent styling for characteristic labels
 
-#### 5.2 PropertyListItem Component Features
-- Clickable row with hover effects
-- Image display with fallback
-- Formatted price display
-- Status/type indicators
-- Responsive cell content
+#### 7.3 Color Scheme
+- **Background:** White modal on semi-transparent backdrop
+- **Text:** Dark text on light background
+- **Tags:** Light background with dark text
+- **Icons:** Consistent with design system
 
-#### 5.3 Integration with PropertyListScreen
-- Import and use PropertyList component
-- Pass property data from JSON file
-- Maintain existing header and search functionality
-- Position table below search bar
+#### 7.4 Spacing
+- **Section Spacing:** Adequate vertical spacing between sections
+- **Element Spacing:** Consistent internal spacing within sections
+- **Grid Spacing:** Proper spacing for image grid and characteristic grid
 
-### 6. Data Requirements
+### 8. User Experience Requirements
 
-#### 6.1 Property Object Structure
-Ensure each property object contains:
-- `id` - Unique identifier
-- `title` - Property title
-- `price` - Numeric price value
-- `currency` - Currency code (EUR)
-- `location` - Property address/location
-- `bedrooms` - Number of bedrooms
-- `area` - Property area in square meters
-- `type` - Property type (apartamento, casa, etc.)
-- `images` - Array of image URLs
-- `status` - Property status (en venta, en alquiler)
+#### 8.1 Interaction Design
+- **Opening:** Smooth fade-in animation
+- **Closing:** Smooth fade-out animation
+- **Close Methods:** Click outside modal, close button, or ESC key
+- **Focus Management:** Proper focus trapping within modal
 
-#### 6.2 Missing Data Handling
-- Provide fallback values for missing fields
-- Display "N/A" or placeholder for empty data
-- Handle missing images with placeholder
-- Ensure consistent data formatting
+#### 8.2 Accessibility
+- **Keyboard Navigation:** Full keyboard support
+- **Screen Readers:** Proper ARIA labels and descriptions
+- **Focus Indicators:** Clear focus states for interactive elements
+- **Color Contrast:** WCAG compliant color combinations
 
-### 7. Future Considerations
+#### 8.3 Performance
+- **Loading:** No loading states required (data passed as props)
+- **Rendering:** Efficient rendering of image grids
+- **Memory:** Proper cleanup of event listeners
 
-#### 7.1 Click Functionality
-- PropertyListItem should be clickable
-- Prepare for modal/detail view implementation
-- Maintain property selection state
-- Add visual feedback for selected items
+### 9. Acceptance Criteria
 
-#### 7.2 Extensibility
-- Design components to be easily extensible
-- Support for additional columns in the future
-- Flexible data structure for new property fields
-- Reusable pagination component
+#### 9.1 Functional Criteria
+- [ ] Modal opens and closes correctly
+- [ ] All property data is displayed in correct sections
+- [ ] Two-column layout is properly implemented
+- [ ] Images are displayed in grid format
+- [ ] Features are shown as tags/chips
+- [ ] Description section scrolls when content overflows
+- [ ] Conditional rendering works for optional fields
 
-### 8. Acceptance Criteria
+#### 9.2 Design Criteria
+- [ ] Modal is centered and properly sized
+- [ ] Typography hierarchy is clear and consistent
+- [ ] Spacing follows design specifications
+- [ ] Colors match design system
+- [ ] Responsive behavior works correctly
 
-#### 8.1 Functional Criteria
-- [ ] Table displays all 10 properties from JSON data
-- [ ] Pagination shows 8 items per page (2 pages total)
-- [ ] All required columns are present and properly labeled
-- [ ] PropertyListItem components are clickable
-- [ ] Pagination controls work correctly
-- [ ] Data is properly formatted and displayed
-
-#### 8.2 Technical Criteria
-- [ ] Components are properly typed with TypeScript
-- [ ] Code follows existing project structure
-- [ ] Tailwind CSS is used for styling
-- [ ] Components are reusable and maintainable
+#### 9.3 Technical Criteria
+- [ ] Component is properly typed with TypeScript
+- [ ] Props interface is well-defined
+- [ ] Code follows project conventions
 - [ ] No console errors or warnings
+- [ ] Accessibility requirements are met
 
-#### 8.3 Integration Criteria
-- [ ] PropertyListScreen successfully imports and uses new components
-- [ ] Existing functionality (header, search) remains intact
-- [ ] Table integrates seamlessly with current design
-- [ ] Responsive design works on mobile and desktop
+### 10. Implementation Notes
 
-### 9. Dependencies
+#### 10.1 Development Approach
+- Create component as a single file in `src/components/ui/`
+- Use existing Property type from the project
+- Implement with Tailwind CSS v4 utilities
+- Focus on layout and styling only (no additional functionality)
+
+#### 10.2 Testing Considerations
+- Test with various property data configurations
+- Verify responsive behavior on different screen sizes
+- Test accessibility with keyboard navigation
+- Validate proper data mapping for all property fields
+
+#### 10.3 Future Enhancements
+- Image gallery with navigation
+- Print functionality
+- Share property functionality
+- Favorite/bookmark functionality
+
+### 11. Dependencies
+
 - React 18+
+- TypeScript
 - Tailwind CSS v4
-- Existing property data structure
-- FontAwesome icons (if needed for pagination)
+- Existing Property type definition
+- Existing design system components (if any)
 
-### 10. Risks and Mitigation
-- **Risk:** Missing property data fields
-  - **Mitigation:** Add fallback values and data validation
-- **Risk:** Performance with large datasets
-  - **Mitigation:** Implement efficient pagination and lazy loading
-- **Risk:** Responsive design challenges
-  - **Mitigation:** Use Tailwind responsive utilities and test on multiple devices
+### 12. Risks and Mitigation
 
-### 11. Success Metrics
-- Table loads and displays all property data correctly
-- Pagination functions properly with 8 items per page
-- Components are reusable and maintainable
-- Integration with existing screen is seamless
+#### 12.1 Technical Risks
+- **Risk:** Complex layout implementation
+- **Mitigation:** Use CSS Grid and Flexbox for reliable layouts
+
+- **Risk:** Image loading and display issues
+- **Mitigation:** Implement proper image handling and fallbacks
+
+#### 12.2 Design Risks
+- **Risk:** Content overflow in description section
+- **Mitigation:** Implement proper scrolling behavior
+
+- **Risk:** Inconsistent spacing and typography
+- **Mitigation:** Use Tailwind's design system consistently
+
+### 13. Success Metrics
+
+- Component renders without errors
+- All property data is correctly displayed
+- Modal is visually appealing and professional
+- User can easily close the modal
+- Component is reusable and maintainable
 - Code quality meets project standards
+
+---
+
+**Document Status:** Draft  
+**Next Review:** Upon completion of implementation  
+**Approval Required:** Technical Lead, Product Owner

@@ -1,14 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import Button from "../components/ui/Button";
 import SearchBar from "../components/ui/SearchBar";
 import PropertyTable from "../components/ui/PropertyTable";
+import PropertyDetailModal from "../components/ui/PropertyDetailModal";
 import { Property } from "../types/Property";
 import propertiesData from "../data/properties.json";
 import { useSearch } from "../hooks/useSearch";
 
 export default function PropertyListScreen() {
   const properties: Property[] = propertiesData as Property[];
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const {
     searchTerm,
@@ -21,7 +25,13 @@ export default function PropertyListScreen() {
   } = useSearch({ properties });
 
   const handlePropertyClick = (property: Property) => {
-    console.log('Propiedad seleccionada:', property);
+    setSelectedProperty(property);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProperty(null);
   };
 
   return (
@@ -63,6 +73,15 @@ export default function PropertyListScreen() {
         properties={filteredProperties}
         onPropertyClick={handlePropertyClick}
       />
+
+      {/* Property Detail Modal */}
+      {selectedProperty && (
+        <PropertyDetailModal
+          property={selectedProperty}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 }

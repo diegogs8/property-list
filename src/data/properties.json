@@ -13,7 +13,7 @@
     "office": "Valencia",
     "features": [ "ascensor", "parking", "seguridad" ],
     "description": "Hermoso apartamento moderno con vistas a la ciudad...",
-    "images": [ "https://picsum.photos/seed/apartamento-1/64/48" ],
+    "images": [ "https://picsum.photos/seed/apartamento-1/512/512" ],
     "date": "15-03-2025"
   },
   {
@@ -30,7 +30,7 @@
     "office": "Alicante",
     "features": [ "jardín", "terraza", "garaje", "piscina" ],
     "description": "Amplia casa familiar con jardín y piscina...",
-    "images": [ "https://picsum.photos/seed/casa-2/64/48" ],
+    "images": [ "https://picsum.photos/seed/casa-2/512/512" ],
     "date": "22-01-2025"
   },
   {
@@ -47,7 +47,7 @@
     "office": "Valencia",
     "features": [ "recepción", "sala de reuniones", "seguridad 24h" ],
     "description": "Oficina moderna en prestigiosa torre empresarial...",
-    "images": [ "https://picsum.photos/seed/oficina-3/64/48" ],
+    "images": [ "https://picsum.photos/seed/oficina-3/512/512" ],
     "date": "08-05-2025"
   },
   {
@@ -64,7 +64,7 @@
     "office": "Alicante",
     "features": [ "terraza", "vista al mar", "piscina comunitaria" ],
     "description": "Increíble dúplex con vistas panorámicas al mar...",
-    "images": [ "https://picsum.photos/seed/duplex-4/64/48" ],
+    "images": [ "https://picsum.photos/seed/duplex-4/512/512" ],
     "date": "12-07-2025"
   },
   {
@@ -81,7 +81,7 @@
     "office": "Valencia",
     "features": [ "techos altos", "ladrillo visto" ],
     "description": "Loft de estilo industrial en zona creativa...",
-    "images": [ "https://picsum.photos/seed/loft-5/64/48" ],
+    "images": [ "https://picsum.photos/seed/loft-5/512/512" ],
     "date": "03-09-2025"
   },
   {
@@ -98,7 +98,7 @@
     "office": "Valencia",
     "features": [ "piscina", "jardín", "garaje", "barbacoa" ],
     "description": "Chalet de lujo con piscina privada y gran jardín...",
-    "images": [ "https://picsum.photos/seed/chalet-6/64/48" ],
+    "images": [ "https://picsum.photos/seed/chalet-6/512/512" ],
     "date": "18-11-2025"
   },
   {
@@ -115,7 +115,7 @@
     "office": "Valencia",
     "features": [ "céntrico" ],
     "description": "Estudio ideal para estudiantes o solteros...",
-    "images": [ "https://picsum.photos/seed/estudio-7/64/48" ],
+    "images": [ "https://picsum.photos/seed/estudio-7/512/512" ],
     "date": "25-02-2025"
   },
   {
@@ -132,7 +132,7 @@
     "office": "Valencia",
     "features": [ "terraza", "ascensor", "vistas" ],
     "description": "Ático luminoso con gran terraza y vistas...",
-    "images": [ "https://picsum.photos/seed/atico-8/64/48" ],
+    "images": [ "https://picsum.photos/seed/atico-8/512/512" ],
     "date": "30-06-2025"
   },
   {
@@ -149,7 +149,7 @@
     "office": "Alicante",
     "features": [ "escaparate", "pie de calle" ],
     "description": "Local ideal para tienda o restaurante...",
-    "images": [ "https://picsum.photos/seed/local-9/64/48" ],
+    "images": [ "https://picsum.photos/seed/local-9/512/512" ],
     "date": "14-04-2025"
   },
   {
@@ -166,7 +166,7 @@
     "office": "Castellon",
     "features": [ "chimenea", "piedra vista", "terraza" ],
     "description": "Casa rústica con encanto, recientemente reformada...",
-    "images": [ "https://picsum.photos/seed/casa-rustica-10/64/48" ],
+    "images": [ "https://picsum.photos/seed/casa-rustica-10/512/512" ],
     "date": "07-12-2025"
   },
   {
@@ -183,7 +183,7 @@
     "office": "Valencia",
     "features": [ "céntrico" ],
     "description": "Estudio ideal para estudiantes o solteros...",
-    "images": [ "https://picsum.photos/seed/prop-11/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-11/512/512" ],
     "date": "25-02-2025"
   },
   {
@@ -200,7 +200,7 @@
     "office": "Valencia",
     "features": [ "terraza", "ascensor", "vistas" ],
     "description": "Ático luminoso con gran terraza y vistas...",
-    "images": [ "https://picsum.photos/seed/prop-12/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-12/512/512" ],
     "date": "30-06-2025"
   },
   {
@@ -217,7 +217,7 @@
     "office": "Alicante",
     "features": [ "escaparate", "pie de calle" ],
     "description": "Local ideal para tienda o restaurante...",
-    "images": [ "https://picsum.photos/seed/prop-13/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-13/512/512" ],
     "date": "14-04-2025"
   },
   {
@@ -234,7 +234,7 @@
     "office": "Castellon",
     "features": [ "chimenea", "piedra vista", "terraza" ],
     "description": "Casa rústica con encanto, recientemente reformada...",
-    "images": [ "https://picsum.photos/seed/prop-14/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-14/512/512" ],
     "date": "07-12-2025"
   },
   {
@@ -251,7 +251,7 @@
     "office": "Alicante",
     "features": [ "escaparate", "pie de calle" ],
     "description": "Local ideal para tienda o restaurante...",
-    "images": [ "https://picsum.photos/seed/prop-15/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-15/512/512" ],
     "date": "14-04-2025"
   },
   {
@@ -268,7 +268,7 @@
     "office": "Castellon",
     "features": [ "chimenea", "piedra vista", "terraza" ],
     "description": "Casa rústica con encanto, recientemente reformada...",
-    "images": [ "https://picsum.photos/seed/prop-16/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-16/512/512" ],
     "date": "07-12-2025"
   },
   {
@@ -285,7 +285,7 @@
     "office": "Alicante",
     "features": [ "escaparate", "pie de calle" ],
     "description": "Local ideal para tienda o restaurante...",
-    "images": [ "https://picsum.photos/seed/prop-17/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-17/512/512" ],
     "date": "14-04-2025"
   },
   {
@@ -302,7 +302,7 @@
     "office": "Castellon",
     "features": [ "chimenea", "piedra vista", "terraza" ],
     "description": "Casa rústica con encanto, recientemente reformada...",
-    "images": [ "https://picsum.photos/seed/prop-18/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-18/512/512" ],
     "date": "07-12-2025"
   },
   {
@@ -319,7 +319,7 @@
     "office": "Alicante",
     "features": [ "escaparate", "pie de calle" ],
     "description": "Local ideal para tienda o restaurante...",
-    "images": [ "https://picsum.photos/seed/prop-19/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-19/512/512" ],
     "date": "14-04-2025"
   },
   {
@@ -336,7 +336,7 @@
     "office": "Castellon",
     "features": [ "chimenea", "piedra vista", "terraza" ],
     "description": "Casa rústica con encanto, recientemente reformada...",
-    "images": [ "https://picsum.photos/seed/prop-20/64/48" ],
+    "images": [ "https://picsum.photos/seed/prop-20/512/512" ],
     "date": "07-12-2025"
   }
 ]
