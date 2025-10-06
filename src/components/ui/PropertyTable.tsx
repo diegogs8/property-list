@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faSortUp, faSortDown, faSort } from '@fortawesome/free-solid-svg-icons';
 import { Property } from '../../types/Property';
 import PropertyTableItem from './PropertyTableItem';
 
@@ -9,14 +9,47 @@ interface PropertyTableProps {
   onPropertyClick?: (property: Property) => void;
 }
 
+type SortField = 'price' | 'date' | null;
+type SortDirection = 'asc' | 'desc';
+
 export default function PropertyTable({ properties, onPropertyClick }: PropertyTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortField, setSortField] = useState<SortField>(null);
+  const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
   const itemsPerPage = 8;
   
-  const totalPages = Math.ceil(properties.length / itemsPerPage);
+  const sortedProperties = useMemo(() => {
+    if (!sortField) return properties;
+    
+    return [...properties].sort((a, b) => {
+      let aValue: number;
+      let bValue: number;
+      
+      if (sortField === 'price') {
+        aValue = a.price;
+        bValue = b.price;
+      } else if (sortField === 'date') {
+        // Convertir fecha DD-MM-YYYY a timestamp
+        const parseDate = (dateStr: string) => {
+          const [day, month, year] = dateStr.split('-').map(Number);
+          return new Date(year, month - 1, day).getTime();
+        };
+        aValue = parseDate(a.date);
+        bValue = parseDate(b.date);
+      } else {
+        return 0;
+      }
+      
+      if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+      if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [properties, sortField, sortDirection]);
+
+  const totalPages = Math.ceil(sortedProperties.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentProperties = properties.slice(startIndex, endIndex);
+  const currentProperties = sortedProperties.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
@@ -26,6 +59,30 @@ export default function PropertyTable({ properties, onPropertyClick }: PropertyT
 
   const handlePropertyClick = (property: Property) => {
     onPropertyClick?.(property);
+  };
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      if (sortDirection === 'desc') {
+        setSortDirection('asc');
+      } else if (sortDirection === 'asc') {
+        setSortField(null);
+        setSortDirection('desc');
+      }
+    } else {
+      setSortField(field);
+      setSortDirection('desc');
+    }
+    setCurrentPage(1);
+  };
+
+  const getSortIcon = (field: SortField) => {
+    if (sortField !== field) {
+      return <FontAwesomeIcon icon={faSort} className="h-3 w-3 text-gray-400" />;
+    }
+    return sortDirection === 'asc' 
+      ? <FontAwesomeIcon icon={faSortUp} className="h-3 w-3 text-gray-600" />
+      : <FontAwesomeIcon icon={faSortDown} className="h-3 w-3 text-gray-600" />;
   };
 
   if (properties.length === 0) {
@@ -58,8 +115,14 @@ export default function PropertyTable({ properties, onPropertyClick }: PropertyT
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Dirección
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Precio
+              <th 
+                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700 hover:bg-gray-100 transition-colors duration-200 select-none"
+                onClick={() => handleSort('price')}
+              >
+                <div className="flex items-center space-x-1">
+                  <span>Precio</span>
+                  {getSortIcon('price')}
+                </div>
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Habitaciones
@@ -67,8 +130,14 @@ export default function PropertyTable({ properties, onPropertyClick }: PropertyT
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Superficie
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Fecha
+              <th 
+                className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700 hover:bg-gray-100 transition-colors duration-200 select-none"
+                onClick={() => handleSort('date')}
+              >
+                <div className="flex items-center space-x-1">
+                  <span>Fecha</span>
+                  {getSortIcon('date')}
+                </div>
               </th>
             </tr>
           </thead>
