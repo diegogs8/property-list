@@ -1,8 +1,8 @@
 # Property List - Sistema de Gestión de Propiedades
 
-Una aplicación web moderna para la gestión y visualización de propiedades inmobiliarias, desarrollada con React, TypeScript y Tailwind CSS.
+Una aplicación web sencilla para la visualización de propiedades inmobiliarias, desarrollada con React, TypeScript y Tailwind CSS.
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
 - [Instalación y Ejecución](#instalación-y-ejecución)
 - [Estructura del Proyecto](#estructura-del-proyecto)
@@ -12,7 +12,7 @@ Una aplicación web moderna para la gestión y visualización de propiedades inm
 - [Mejoras Futuras](#mejoras-futuras)
 - [Tecnologías Utilizadas](#tecnologías-utilizadas)
 
-## 🚀 Instalación y Ejecución
+## Instalación y Ejecución
 
 ### Prerrequisitos
 
@@ -23,7 +23,7 @@ Una aplicación web moderna para la gestión y visualización de propiedades inm
 
 1. **Clonar el repositorio**
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/diegogs8/property-list.git
    cd property-list
    ```
 
@@ -49,7 +49,7 @@ Una aplicación web moderna para la gestión y visualización de propiedades inm
 - `npm run preview` - Previsualiza la build de producción
 - `npm run lint` - Ejecuta el linter ESLint
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 src/
@@ -77,7 +77,7 @@ src/
 └── index.css            # Estilos globales
 ```
 
-## 🛠 Decisiones Técnicas
+## Decisiones Técnicas
 
 ### Arquitectura y Organización
 
@@ -91,7 +91,7 @@ src/
 2. **Gestión de Estado**
    - Estado local con `useState` para simplicidad
    - Hook personalizado `useSearch` para lógica de búsqueda
-   - No se implementó Redux/Zustand por la simplicidad del proyecto
+   - No se implementó Redux/Zustand
 
 3. **Estilos**
    - **Tailwind CSS**: Para estilos utilitarios y diseño responsivo
@@ -110,9 +110,9 @@ src/
 3. **Composición**: Componentes pequeños y especializados
 4. **Custom Hooks**: Para lógica reutilizable (búsqueda)
 
-## ✨ Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
-### 🔍 Sistema de Búsqueda Avanzado
+### Sistema de Búsqueda Avanzado
 
 - **Búsqueda en tiempo real** con debounce (300ms)
 - **Múltiples campos de búsqueda**: título, ubicación, tipo, estado, oficina, ID
@@ -131,34 +131,34 @@ const {
 } = useSearch({ properties });
 ```
 
-### 📊 Tabla de Propiedades Interactiva
+### Tabla de Propiedades Interactiva
 
 - **Paginación**: 8 propiedades por página
 - **Ordenamiento**: Por precio y fecha (ascendente/descendente)
 - **Diseño responsivo**: Vista de tabla en desktop, cards en móvil
 - **Navegación intuitiva**: Controles de paginación con elipsis
 
-### 🏠 Modal de Detalles de Propiedad
+### Modal de Detalles de Propiedad
 
 - **Vista completa**: Información detallada de la propiedad
 - **Galería de imágenes**: Navegación entre múltiples fotos
 - **Información estructurada**: Precio, características, descripción
 - **Cierre intuitivo**: Click en backdrop o botón de cerrar
 
-### 🎨 Interfaz de Usuario
+### Interfaz de Usuario
 
 - **Sidebar colapsible**: Navegación expandible/contraíble
 - **Diseño moderno**: Colores neutros y tipografía clara
 - **Responsive design**: Adaptable a todos los dispositivos
 - **Estados de carga**: Indicadores visuales durante búsquedas
 
-### 📱 Experiencia Móvil
+### Experiencia Móvil
 
 - **Vista optimizada**: Cards en lugar de tabla en móvil
 - **Touch-friendly**: Botones y áreas de toque apropiadas
 - **Navegación simplificada**: Sidebar colapsible por defecto
 
-## 🚧 Desafíos y Soluciones
+## Desafíos y Soluciones
 
 ### 1. **Ordenamiento de Fechas**
 
@@ -202,17 +202,7 @@ const shouldShow =
 - Vista de cards en móvil (`md:hidden`)
 - Información condensada pero completa
 
-### 5. **Gestión de Estado del Modal**
-
-**Desafío**: Controlar apertura/cierre del modal y datos seleccionados.
-
-**Solución**: Estado sincronizado con `useState`:
-```typescript
-const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
-const [isModalOpen, setIsModalOpen] = useState(false);
-```
-
-## 🔮 Mejoras Futuras
+## Mejoras Futuras
 
 ### Funcionalidades Prioritarias
 
@@ -230,6 +220,12 @@ const [isModalOpen, setIsModalOpen] = useState(false);
    - Sistema de propiedades favoritas
    - Comparación de propiedades
    - Modo oscuro o personalización del tema
+   - Personalización de la tabla como número de propiedades por página
+
+3. **Personalización tabla de propiedades**
+   - Número de propiedades mostradas por página
+   - Ordenación propia de las columnas
+   - Ocultar o mostrar columnas
 
 ### Mejoras Técnicas
 
@@ -247,7 +243,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
    - Soporte multiidioma (i18n)
    - Formateo de fechas, números y monedas localizado
 
-## 🛠 Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 ### Frontend
 - **React 19.1.1** - Biblioteca de interfaz de usuario
@@ -265,7 +261,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 
 ---
 
-## 📝 Notas de Desarrollo
+## Notas de Desarrollo
 
 Este proyecto fue desarrollado como una demostración de habilidades en React y TypeScript, enfocándose en:
 
@@ -275,7 +271,3 @@ Este proyecto fue desarrollado como una demostración de habilidades en React y 
 - **Arquitectura escalable**
 
 La aplicación está lista para ser extendida con funcionalidades adicionales y puede servir como base para un sistema de gestión inmobiliaria más complejo.
-
----
-
-*Desarrollado con ❤️ usando React y TypeScript*
